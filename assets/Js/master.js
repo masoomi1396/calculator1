@@ -1,6 +1,7 @@
 let number1 = "";
 let number2 = null;
 let lastAction = "";
+let flag_dot = false;
 const screen = document.getElementsByClassName("screen")[0];
 function calculator(_key) {
     switch (_key) {
@@ -10,6 +11,7 @@ function calculator(_key) {
                     number1 = Action(number1, number2, _key);
                     number2 = null;
                     lastAction = "";
+                    flag_dot = false;
                 }
                 lastAction = _key;
                 number2 = number1;
@@ -23,6 +25,7 @@ function calculator(_key) {
                     number1 = Action(number1, number2, _key);
                     number2 = null;
                     lastAction = "";
+                    flag_dot = false;
                 }
                 lastAction = _key;
                 number2 = number1;
@@ -36,6 +39,7 @@ function calculator(_key) {
                     number1 = Action(number1, number2, _key);
                     number2 = null;
                     lastAction = "";
+                    flag_dot = false;
                 }
                 lastAction = _key;
                 number2 = number1;
@@ -49,6 +53,7 @@ function calculator(_key) {
                     number1 = Action(number1, number2, _key);
                     number2 = null;
                     lastAction = "";
+                    flag_dot = false;
                 }
                 lastAction = _key;
                 number2 = number1;
@@ -62,12 +67,21 @@ function calculator(_key) {
                     number1 = Action(number1, number2, lastAction);
                     number2 = null;
                     lastAction = _key;
+                    flag_dot = false;
                 }
                 else {
                     alert("Please Enter Two Numbers");
                 }
             }
             screen.innerText = number1;
+            break;
+        case '.':
+            if(!flag_dot)
+            {
+                number1 += _key;
+                screen.innerText = number1;
+                flag_dot = true;
+            }
             break;
         default:
             if(lastAction == "=")
