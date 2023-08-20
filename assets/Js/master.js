@@ -103,6 +103,7 @@ function Clear() {
     number1 = "";
     number2 = null;
     lastAction = "";
+    flag_dot = false;
     screen.innerText = 0;
 }
 function Action(number1, number2, action) {
