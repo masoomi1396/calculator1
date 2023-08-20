@@ -16,6 +16,7 @@ function calculator(_key) {
                 lastAction = _key;
                 number2 = number1;
                 number1 = "";
+                flag_dot = false;
             }
             screen.innerText = 0;
             break;
@@ -30,6 +31,7 @@ function calculator(_key) {
                 lastAction = _key;
                 number2 = number1;
                 number1 = "";
+                flag_dot = false;
             }
             screen.innerText = 0;
             break;
@@ -44,6 +46,7 @@ function calculator(_key) {
                 lastAction = _key;
                 number2 = number1;
                 number1 = "";
+                flag_dot = false;
             }
             screen.innerText = 0;
             break;
@@ -58,6 +61,7 @@ function calculator(_key) {
                 lastAction = _key;
                 number2 = number1;
                 number1 = "";
+                flag_dot = false;
             }
             screen.innerText = 0;
             break;
