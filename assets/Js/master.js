@@ -1,98 +1,36 @@
-let number1 = "";
-let number2 = null;
+let number1 = "0";
+let number2 = "";
 let lastAction = "";
-let flag_dot = false;
 const screen = document.getElementsByClassName("screen")[0];
 function calculator(_key) {
     switch (_key) {
         case '+':
-            if (number1 != "") {
-                if (number2 != null) {
-                    number1 = Action(number1, number2, _key);
-                    number2 = null;
-                    lastAction = "";
-                    flag_dot = false;
-                }
-                lastAction = _key;
-                number2 = number1;
-                number1 = "";
-                flag_dot = false;
-            }
-            screen.innerText = 0;
-            break;
         case '-':
-            if (number1 != "") {
-                if (number2 != null) {
-                    number1 = Action(number1, number2, _key);
-                    number2 = null;
-                    lastAction = "";
-                    flag_dot = false;
-                }
-                lastAction = _key;
-                number2 = number1;
-                number1 = "";
-                flag_dot = false;
-            }
-            screen.innerText = 0;
-            break;
         case '÷':
-            if (number1 != "") {
-                if (number2 != null) {
-                    number1 = Action(number1, number2, _key);
-                    number2 = null;
-                    lastAction = "";
-                    flag_dot = false;
-                }
-                lastAction = _key;
-                number2 = number1;
-                number1 = "";
-                flag_dot = false;
-            }
-            screen.innerText = 0;
-            break;
         case 'x':
-            if (number1 != "") {
-                if (number2 != null) {
-                    number1 = Action(number1, number2, _key);
-                    number2 = null;
-                    lastAction = "";
-                    flag_dot = false;
-                }
-                lastAction = _key;
-                number2 = number1;
-                number1 = "";
-                flag_dot = false;
-            }
-            screen.innerText = 0;
+            CheckIsSecondNumberEnterAndHandleIt(_key);
             break;
         case '=':
-            if (number1 != "") {
-                if (number2 != null) {
-                    number1 = Action(number1, number2, lastAction);
-                    number2 = null;
-                    lastAction = _key;
-                    flag_dot = false;
-                }
-                else {
-                    alert("Please Enter Two Numbers");
-                }
+            HandleEqual(_key);
+            if(isNaN(number1))
+            {
+                console.log("CLEAR")
+                Clear();
             }
             screen.innerText = number1;
             break;
         case '.':
-            if(!flag_dot)
-            {
-                number1 += _key;
-                screen.innerText = number1;
-                flag_dot = true;
-            }
+            CheckDot(_key);
             break;
         default:
-            if(lastAction == "=")
-            {
-                if(window.confirm("You Are Rewrite your Result!! Are you sure ??"))
+            if (lastAction == "=") {
+                if (window.confirm("You Are Rewrite your Result!! Are you sure ??"))
                     lastAction = "";
-                break;
+                else
+                    break;
+            }
+            if (number1 == "0") {
+                number1 = "";
             }
             number1 += _key;
             screen.innerText = number1;
@@ -100,13 +38,12 @@ function calculator(_key) {
     }
 }
 function Clear() {
-    number1 = "";
-    number2 = null;
+    number1 = "0";
+    number2 = "";
     lastAction = "";
-    flag_dot = false;
-    screen.innerText = 0;
+    screen.innerText = number1;
 }
-function Action(number1, number2, action) {
+function Action(action) {
     if (action == '+')
         return Number(number1) + Number(number2);
     else if (action == '-')
@@ -114,7 +51,30 @@ function Action(number1, number2, action) {
     else if (action == '÷')
         return Number(number2) / Number(number1);
     else {
-        console.log("Action : " + action);
         return Number(number1) * Number(number2);
     }
+}
+function CheckIsSecondNumberEnterAndHandleIt(_key) {
+    if(number2 != "")
+        number1 = Action(_key);
+    lastAction = _key;
+    number2 = number1;
+    number1 = "0";
+    screen.innerText = number1;
+}
+function CheckDot(_key) {
+    if (!number1.includes('.')) {
+        number1 += _key;
+        screen.innerText = number1;
+    }
+}
+function HandleEqual(_key) {
+    if(lastAction == "")
+    {
+        alert("You should select one Action");
+        return;
+    }
+    number1 = Action(lastAction);
+    number2 = "";
+    lastAction = _key;
 }
